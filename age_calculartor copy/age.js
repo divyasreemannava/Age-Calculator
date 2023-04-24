@@ -35,21 +35,31 @@ const year = Number(birthyear.value);
 const Bdate = Number(birthdate.value);
 const Bmonth = Number(birthmonth.value);
 const months = [31,28,31,30,31,30,31,31,30,31,30,31]
-
+let calMonth;
+if(currentMonth===Number(birthmonth.value)){
+    calMonth = 0
+}else{
 if(Bdate>currentDate){
     currentDate =currentDate + months[currentMonth-1];
     currentMonth=currentMonth-1;
 }
 if(Bmonth>currentMonth){
     currentYear = currentYear-1;
-    currentMonth=currentMonth+1
+    currentMonth=currentMonth+12
     
+}
 }
 
 
-const calDays = currentDate-Bdate
-const calMonth = currentMonth-Bmonth
+const calDays = currentDate-Number(birthdate.value)
+ calMonth = currentMonth-Number(birthmonth.value)
 submit.addEventListener("click",()=>{
-    let calYear = currentYear-((Number(birthyear.value)))
+    if(birthmonth.value===""||birthdate.value===""||birthyear===""){
+        validate.innerText="Please Enter the Valid Details"
+    }else{
+        validate.innerText=""
+        let calYear = currentYear-((Number(birthyear.value)))
     validate.innerText=`Your Age is ${calYear} years ${calMonth} months ${calDays} days`
+    }
+    
 })
